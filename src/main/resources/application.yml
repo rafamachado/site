@@ -1,0 +1,39 @@
+# Arquivo responsável pela conexão ao(s) banco(s) de dados
+server:
+  port: 8080
+  contextPath: /SpringBootTaskList
+---
+# Este é um banco criado em tempo de execução, não necessita de configuração somente do driver
+spring:
+  profiles: local, default
+datasource:
+  taskapp:
+    url: jdbc:h2:~/test
+    username: SA
+    password:
+    driverClassName: org.h2.Driver
+    defaultSchema:
+    maxPoolSize: 10
+    hibernate:
+      hbm2ddl.method: create-drop
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.H2Dialect
+---
+# Abaixo informar username, password e a url de conexão do banco
+spring:
+  profiles: mysql
+datasource:
+  taskapp:
+    url: jdbc:mysql://localhost:3306/bdteste
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+    defaultSchema:
+    maxPoolSize: 20
+    hibernate:
+      hbm2ddl.method: update
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.MySQLDialect
+
